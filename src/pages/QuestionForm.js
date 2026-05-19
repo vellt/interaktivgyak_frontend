@@ -98,7 +98,7 @@ export default function QuestionForm() {
     <div className="qform-page">
       <div className="qform-header">
         <button className="btn btn-outline" onClick={() => navigate('/admin')}>← Vissza</button>
-        <h1>{isEdit ? '✏️ Kérdés szerkesztése' : '＋ Új kérdés'}</h1>
+        <h1>{isEdit ? 'Kérdés szerkesztése' : '＋ Új kérdés'}</h1>
       </div>
 
       <div className="qform-body">

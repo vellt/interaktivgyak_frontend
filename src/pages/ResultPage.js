@@ -74,13 +74,6 @@ export default function ResultPage() {
             </div>
             
           </div>
-
-          <div className="pass-info">
-            Minimum szükséges: <strong>{passPercentage}%</strong> —
-            {passed
-              ? " Elérted!"
-              : ` Nem érted el (hiányzott: ${(passPercentage - percentage).toFixed(1)}%)`}
-          </div>
         </div>
 
         {/* Kérdésenkénti áttekintés */}
