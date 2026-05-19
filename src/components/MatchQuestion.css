@@ -1,0 +1,57 @@
+.match-hint { font-size: 13px; color: #5f6368; margin-bottom: 16px; font-style: italic; }
+
+.match-pairs-display { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+.match-row {
+  display: grid; grid-template-columns: 1fr 40px 1fr;
+  align-items: center; gap: 8px;
+}
+
+.match-left, .match-right-slot {
+  padding: 12px 14px; border-radius: 10px; font-size: 15px;
+  transition: all 0.15s; min-height: 44px;
+}
+
+.match-left {
+  background: #e8f0fe; border: 2px solid #c5d8f7;
+  cursor: pointer; font-weight: 500;
+}
+.match-left:hover { border-color: #1a73e8; }
+.match-left.selected-item { border-color: #1a73e8; background: #1a73e8; color: white; }
+
+.match-connector {
+  text-align: center; font-size: 20px; color: #5f6368;
+}
+.match-row.paired .match-connector { color: #34a853; }
+
+.match-right-filled {
+  background: #e6f4ea; border: 2px solid #34a853;
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; font-size: 15px;
+}
+.match-right-empty {
+  background: #f8f9fa; border: 2px dashed var(--border);
+  border-radius: 10px; padding: 10px 12px;
+  color: #9aa0a6; font-size: 14px; text-align: center;
+}
+
+.match-clear {
+  background: none; border: none; cursor: pointer;
+  color: #ea4335; font-size: 14px; padding: 2px;
+  border-radius: 4px; flex-shrink: 0;
+}
+.match-clear:hover { background: #fce8e6; }
+
+.match-pool { background: #f8f9fa; border-radius: 12px; padding: 16px; }
+.match-pool-label { font-size: 13px; color: #5f6368; margin-bottom: 10px; font-weight: 500; }
+.match-pool-items { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.match-pool-item {
+  padding: 8px 16px; border-radius: 8px; border: 2px solid #c5d8f7;
+  background: #e8f0fe; color: #1a73e8; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+}
+.match-pool-item:hover:not(:disabled) { background: #1a73e8; color: white; }
+.match-pool-item.used { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+.match-pool-item.selected-item { background: #1a73e8; color: white; }

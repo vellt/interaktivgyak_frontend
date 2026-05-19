@@ -1,0 +1,59 @@
+.qform-page { min-height: 100vh; background: var(--bg); }
+
+.qform-header {
+  background: white; padding: 16px 32px;
+  display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 10;
+}
+.qform-header h1 { font-size: 20px; font-weight: 700; }
+
+.qform-body { max-width: 800px; margin: 32px auto; padding: 0 16px 40px; }
+
+.type-selector { display: flex; gap: 10px; flex-wrap: wrap; }
+.type-btn {
+  padding: 10px 18px; border-radius: 8px; border: 2px solid var(--border);
+  background: white; font-size: 14px; cursor: pointer; transition: all 0.15s;
+  color: var(--text);
+}
+.type-btn:hover { border-color: #1a73e8; }
+.type-btn.active { border-color: #1a73e8; background: #e8f0fe; color: #1a73e8; font-weight: 600; }
+
+.options-list, .pairs-list, .sort-list { display: flex; flex-direction: column; gap: 10px; }
+
+.option-row {
+  display: flex; align-items: center; gap: 10px;
+  background: #fafafa; border-radius: 8px; padding: 8px 12px;
+  border: 1.5px solid var(--border);
+}
+.option-row.correct { border-color: #34a853; background: #e6f4ea; }
+.option-row input { border: none; background: transparent; flex: 1; }
+.option-row input:focus { outline: none; }
+
+.correct-toggle {
+  font-size: 18px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
+}
+.remove-btn { padding: 6px 10px !important; font-size: 13px !important; flex-shrink: 0; }
+
+.pair-row {
+  display: flex; align-items: center; gap: 10px;
+}
+.pair-arrow { color: #5f6368; font-size: 18px; flex-shrink: 0; }
+
+.sort-row { display: flex; align-items: center; gap: 10px; }
+.sort-num {
+  width: 28px; height: 28px; background: #1a73e8; color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.sort-ctrl { display: flex; gap: 4px; }
+.sort-ctrl button {
+  width: 30px; height: 30px; border: 1px solid var(--border); background: white;
+  border-radius: 6px; cursor: pointer; font-size: 12px;
+}
+.sort-ctrl button:disabled { opacity: 0.3; cursor: not-allowed; }
+.sort-ctrl button:hover:not(:disabled) { background: #e8f0fe; }
+
+.form-actions {
+  display: flex; justify-content: flex-end; gap: 12px; margin-top: 28px;
+  padding-top: 24px; border-top: 1px solid var(--border);
+}

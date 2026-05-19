@@ -1,0 +1,34 @@
+.sort-hint { font-size: 13px; color: #5f6368; margin-bottom: 12px; font-style: italic; }
+
+.sort-list { display: flex; flex-direction: column; gap: 8px; }
+
+.sort-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 10px;
+  border: 2px solid var(--border); background: #fafafa;
+  cursor: grab; transition: all 0.15s; user-select: none;
+}
+.sort-item:hover { border-color: #1a73e8; background: #f0f4ff; }
+.sort-item.dragging { opacity: 0.4; }
+.sort-item.drag-over { border-color: #1a73e8; background: #e8f0fe; border-style: dashed; }
+
+.sort-pos {
+  width: 28px; height: 28px; background: #1a73e8; color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.sort-handle { font-size: 18px; color: #9aa0a6; cursor: grab; }
+.sort-text { flex: 1; font-size: 15px; }
+
+.sort-arrows { display: flex; flex-direction: column; gap: 2px; }
+.sort-arrows button {
+  width: 28px; height: 22px; border: 1px solid var(--border);
+  background: white; border-radius: 4px; cursor: pointer; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.sort-arrows button:hover:not(:disabled) { background: #e8f0fe; border-color: #1a73e8; }
+.sort-arrows button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Result */
+.sort-item.correct { border-color: #34a853; background: #e6f4ea; }
+.sort-item.incorrect { border-color: #ea4335; background: #fce8e6; }

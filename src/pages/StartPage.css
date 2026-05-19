@@ -1,0 +1,299 @@
+.start-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 2vh, 24px);
+}
+
+.start-hero {
+  width: min(100%, 760px);
+  max-height: none;
+  background: #ffffff;
+  border-radius: clamp(22px, 3vh, 34px);
+  padding: clamp(18px, 3vh, 34px);
+  text-align: center;
+  border: 4px solid #d8e8f8;
+  box-shadow: 0 8px 0 #b8d7f2, 0 22px 42px rgba(20, 61, 113, .14);
+  display: flex;
+  flex-direction: column;
+}
+
+.start-hero img {
+  width: clamp(300px, 15vh, 170px);
+  margin: 0 auto clamp(10px, 2vh, 22px);
+}
+
+.start-hero h1 {
+  font-size: clamp(24px, 5vh, 48px);
+  line-height: .95;
+  font-weight: 900;
+  color: #0b376d;
+  letter-spacing: -0.05em;
+  margin-bottom: clamp(4px, 1vh, 10px);
+}
+
+.subtitle {
+  color: #52708f;
+  font-size: clamp(15px, 2.2vh, 20px);
+  font-weight: 800;
+  margin-bottom: clamp(12px, 2.5vh, 28px);
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.5vh, 14px);
+  margin-bottom: clamp(12px, 2.2vh, 24px);
+}
+
+.info-card {
+  background: #f7fbff;
+  border: 3px solid #d8e8f8;
+  border-radius: clamp(18px, 2.6vh, 26px);
+  padding: clamp(10px, 2vh, 20px) 14px;
+  box-shadow: 0 6px 0 #d8e8f8;
+}
+
+.info-value {
+  font-size: clamp(20px, 5vh, 25px);
+  line-height: 1;
+  font-weight: 950;
+  color: #0b5faf;
+  letter-spacing: -0.04em;
+}
+
+.info-label {
+  margin-top: 6px;
+  font-size: clamp(11px, 1.7vh, 14px);
+  font-weight: 900;
+  color: #52708f;
+  text-transform: uppercase;
+}
+
+/* ── Rules / Tudnivalók ── */
+.rules {
+  text-align: left;
+  background: #f7fbff;
+  border: 3px solid #d8e8f8;
+  border-radius: clamp(18px, 2.8vh, 28px);
+  padding: 0;
+  margin-bottom: clamp(12px, 2.2vh, 24px);
+  overflow: hidden;
+}
+
+.rules-toggle {
+  width: 100%;
+  padding: clamp(14px, 2.4vh, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  color: #0b376d;
+  font-size: clamp(17px, 2.4vh, 22px);
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.rules-arrow {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #eaf5ff;
+  border: 3px solid #d8e8f8;
+  box-shadow: 0 4px 0 #d8e8f8;
+  transition: transform .2s ease;
+}
+
+.rules.open .rules-arrow {
+  transform: rotate(90deg);
+}
+
+/* A grid trükk: a KÖZVETLEN gyereknek kell min-height:0 */
+.rules-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .3s ease;
+}
+
+.rules.open .rules-content {
+  grid-template-rows: 1fr;
+}
+
+/* Ez a wrapper veszi fel az overflow:hidden-t, nem az ul */
+.rules-content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.rules ul {
+  list-style: none;
+  display: grid;
+  gap: clamp(6px, 1.2vh, 10px);
+  padding: 0 clamp(14px, 2.4vh, 24px) clamp(14px, 2.4vh, 24px);
+  margin: 0;
+}
+
+.rules li {
+  position: relative;
+  padding-left: 32px;
+  color: #29435f;
+  font-size: clamp(12px, 1.75vh, 15px);
+  line-height: 1.25;
+  font-weight: 650;
+}
+
+.rules li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: clamp(19px, 2.6vh, 24px);
+  height: clamp(19px, 2.6vh, 24px);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #b7def5;
+  color: #0b376d;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+/* ── Result percent bar ── */
+.result-percent {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 82px;
+  margin: 22px 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #eaf5ff;
+  border: 3px solid #b7def5;
+  box-shadow: 0 7px 0 #b7def5;
+  color: #0b376d;
+  font-size: clamp(34px, 6vw, 48px);
+  font-weight: 950;
+}
+
+.result-percent::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--percent);
+  background: linear-gradient(135deg, #8ee6a8, #39c86a);
+  border-radius: inherit;
+  animation: fillIn .9s ease-out both;
+}
+
+.result-percent::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% 0;
+  width: var(--percent);
+  background: radial-gradient(circle at 20px 50%, rgba(255,255,255,.38) 0 10px, transparent 11px);
+  background-size: 42px 100%;
+  animation: waveMove 1.4s linear infinite;
+  opacity: .7;
+}
+
+.result-percent span {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 0 rgba(255,255,255,.45);
+}
+
+@keyframes fillIn {
+  from { width: 0; }
+  to   { width: var(--percent); }
+}
+
+@keyframes waveMove {
+  from { transform: translateX(-42px); }
+  to   { transform: translateX(42px); }
+}
+
+/* ── Review image ── */
+.review-image {
+  margin-top: 14px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 3px solid #d8e8f8;
+  box-shadow: 0 6px 0 #d8e8f8;
+  background: #f7fbff;
+}
+
+.review-image img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* ── Result actions ── */
+.result-actions .btn {
+  width: 100%;
+  min-height: 60px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  border: 3px solid #0b5faf;
+  background: #0b5faf;
+  color: white;
+  box-shadow: 0 7px 0 #063f78;
+  font-size: 18px;
+  font-weight: 950;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+
+.result-actions .btn:hover:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 5px 0 #063f78;
+  background: #096bc9;
+}
+
+/* ── Admin link ── */
+.admin-link {
+  display: inline-block;
+  margin-top: clamp(10px, 1.8vh, 20px);
+  color: #52708f;
+  font-size: clamp(12px, 1.7vh, 14px);
+  font-weight: 850;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 700px) {
+  .start-page {
+    padding: 10px;
+  }
+
+  .start-hero {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .info-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .info-card {
+    padding: 10px 6px;
+  }
+
+  .rules li:nth-child(4) {
+    display: none;
+  }
+}
