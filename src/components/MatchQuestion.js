@@ -2,16 +2,20 @@ import React, { useState, useMemo } from 'react';
 import './MatchQuestion.css';
 
 export default function MatchQuestion({ pairs, value = {}, onChange }) {
-  const [selected, setSelected] = useState(null); // { side: 'left'|'right', id, text }
+  const [selected, setSelected] = useState(null);
 
-  const rightItems = useMemo(() => {
-    return [...pairs].sort(() => Math.random() - 0.5);
+  // Deduplicated right items with available count
+  const rightItemPool = useMemo(() => {
+    const counts = {};
+    pairs.forEach(p => {
+      counts[p.right_item] = (counts[p.right_item] || 0) + 1;
+    });
+    const unique = Object.keys(counts).map(text => ({ text, total: counts[text] }));
+    return unique.sort(() => Math.random() - 0.5);
   }, []); // eslint-disable-line
 
-  // value: { leftId: rightItem }
   const handleLeftClick = (pair) => {
     if (selected?.side === 'right') {
-      // Pair them
       const newVal = { ...value, [pair.id]: selected.text };
       onChange(newVal);
       setSelected(null);
@@ -20,13 +24,13 @@ export default function MatchQuestion({ pairs, value = {}, onChange }) {
     }
   };
 
-  const handleRightClick = (item) => {
+  const handleRightClick = (text) => {
     if (selected?.side === 'left') {
-      const newVal = { ...value, [selected.id]: item.right_item };
+      const newVal = { ...value, [selected.id]: text };
       onChange(newVal);
       setSelected(null);
     } else {
-      setSelected({ side: 'right', id: item.id, text: item.right_item });
+      setSelected({ side: 'right', text });
     }
   };
 
@@ -36,13 +40,19 @@ export default function MatchQuestion({ pairs, value = {}, onChange }) {
     onChange(newVal);
   };
 
-  const usedRightItems = Object.values(value);
+  // Count how many times each right_item text is already used
+  const usedCounts = useMemo(() => {
+    const counts = {};
+    Object.values(value).forEach(text => {
+      counts[text] = (counts[text] || 0) + 1;
+    });
+    return counts;
+  }, [value]);
 
   return (
     <div className="match-question">
       <p className="match-hint">Kattints egy bal oldali elemre, majd a hozzá tartozó jobb oldalira!</p>
 
-      {/* Paired items */}
       <div className="match-pairs-display">
         {pairs.map(pair => (
           <div key={pair.id} className={`match-row ${value[pair.id] ? 'paired' : 'unpaired'}`}>
@@ -69,20 +79,23 @@ export default function MatchQuestion({ pairs, value = {}, onChange }) {
         ))}
       </div>
 
-      {/* Right items pool */}
       <div className="match-pool">
         <p className="match-pool-label">Elérhető párok:</p>
         <div className="match-pool-items">
-          {rightItems.map(item => {
-            const used = usedRightItems.includes(item.right_item);
+          {rightItemPool.map(({ text, total }) => {
+            const usedCount = usedCounts[text] || 0;
+            const remaining = total - usedCount;
+            const isExhausted = remaining <= 0;
+            const isSelected = selected?.side === 'right' && selected.text === text;
+
             return (
               <button
-                key={item.id}
-                className={`match-pool-item ${used ? 'used' : ''} ${selected?.side === 'right' && selected.id === item.id ? 'selected-item' : ''}`}
-                onClick={() => !used && handleRightClick(item)}
-                disabled={used}
+                key={text}
+                className={`match-pool-item ${isExhausted ? 'used' : ''} ${isSelected ? 'selected-item' : ''}`}
+                onClick={() => !isExhausted && handleRightClick(text)}
+                disabled={isExhausted}
               >
-                {item.right_item}
+                {text}{total > 1 && ` (${remaining}/${total})`}
               </button>
             );
           })}
