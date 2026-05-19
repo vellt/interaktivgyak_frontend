@@ -65,13 +65,9 @@ export default function ResultPage() {
             </div>
             <div className="stat-item">
               <div className="stat-val incorrect">{wrong}</div>
-              <div className="stat-label">Hibás</div>
+              <div className="stat-label">Hibás / Megválaszolatlan</div>
             </div>
            
-            <div className="stat-item">
-              <div className="stat-val unanswered">{unanswered}</div>
-              <div className="stat-label">Megválaszolatlan</div>
-            </div>
             
           </div>
         </div>
