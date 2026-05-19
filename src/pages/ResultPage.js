@@ -67,12 +67,12 @@ export default function ResultPage() {
               <div className="stat-val incorrect">{wrong}</div>
               <div className="stat-label">Hibás</div>
             </div>
-            {unanswered > 0 && (
-              <div className="stat-item">
-                <div className="stat-val unanswered">{unanswered}</div>
-                <div className="stat-label">Megválaszolatlan</div>
-              </div>
-            )}
+           
+            <div className="stat-item">
+              <div className="stat-val unanswered">{unanswered}</div>
+              <div className="stat-label">Megválaszolatlan</div>
+            </div>
+            
           </div>
 
           <div className="pass-info">

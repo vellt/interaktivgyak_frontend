@@ -74,7 +74,7 @@ export default function ExamPage() {
   }, [examData, finishExam]);
 
   // Válasz mentése — ref + state egyszerre frissül
-  const saveAnswer = useCallback(async (questionId, answer) => {
+const saveAnswer = useCallback(async (questionId, answer) => {
   const newAnswers = { ...answersRef.current, [questionId]: answer };
   answersRef.current = newAnswers;
   setAnswers(newAnswers);
@@ -85,20 +85,24 @@ export default function ExamPage() {
       answer
     });
   } catch (e) {
-    console.error('Válasz mentési hiba:', e);
+    console.error('TELJES HIBA:', e.response?.data); // ← mit ír ki?
+    console.error('sessionId:', examDataRef.current?.sessionId);
+    console.error('questionId:', questionId);
+    console.error('answer:', answer);
     if (e.response?.data?.expired) finishExam(true);
   }
 }, [finishExam]);
 
 // Sort auto-mentés
+// Sort auto-mentés — answersRef-et olvassuk, nem answers state-et
 useEffect(() => {
   if (!examData) return;
   const q = examData.questions[current];
-  if (q.type === 'sort' && answers[q.id] === undefined) {
+  if (q.type === 'sort' && answersRef.current[q.id] === undefined) {
     const defaultOrder = q.sortItems.map(item => item.id);
     saveAnswer(q.id, defaultOrder);
   }
-}, [current, examData, answers, saveAnswer]);
+}, [current, examData, saveAnswer]); // answers kikerül!
 
   if (!examData) return <div className="spinner" />;
 
