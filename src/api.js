@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://nodejs218.dszcbaross.edu.hu/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://nodejs419.dszcbaross.edu.hu/api',
 });
 
 // Token csatolása minden kéréshez
